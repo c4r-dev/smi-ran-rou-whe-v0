@@ -2,8 +2,8 @@ import "./globals.css";
 import FaviconButton from "./components/FaviconButton";
 
 export const metadata = {
-  title: "Which of these sequences was random?",
-  description: "Which of these sequences was random?",
+  title: "Roulette Wheel",
+  description: "Roulette Wheel is a simple game to test your intuition.",
 };
 
 export default function RootLayout({ children }) {
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           {/* Title container for responsive width */}
           <div className="title-container">
             <h1 className="title">
-              Which of these sequences is random?
+              Let's explore Roulette Wheel Results
             </h1>
           </div>
         </header>
