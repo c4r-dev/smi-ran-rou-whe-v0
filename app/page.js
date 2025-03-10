@@ -17,9 +17,14 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 export default function Page() {
   const [spins, setSpins] = useState([]);
 
-  const handleSpin = () => {
-    const newNumber = Math.floor(Math.random() * 17);
-    setSpins([...spins, newNumber]);
+  // Modified handleSpin to accept a parameter (times)
+  const handleSpin = (times = 1) => {
+    const newSpins = []; // ✅ Always start fresh with an empty array
+    for (let i = 0; i < times; i++) {
+      const newNumber = Math.floor(Math.random() * 17);
+      newSpins.push(newNumber);
+    }
+    setSpins(newSpins);
   };
 
   const getColor = (num) => {
@@ -116,7 +121,22 @@ export default function Page() {
         Let’s spin the wheel
       </p>
 
-      <button onClick={handleSpin} className="compare-answer-button">1X</button>
+      {/* Button Container for Horizontal Layout */}
+      <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginTop: "10px" }}>
+        <button onClick={() => handleSpin(1)} className="compare-answer-button">
+          1X
+        </button>
+        <button onClick={() => handleSpin(10)} className="compare-answer-button">
+          10X
+        </button>
+        <button onClick={() => handleSpin(100)} className="compare-answer-button">
+          100X
+        </button>
+        <button onClick={() => handleSpin(1000)} className="compare-answer-button">
+          1000X
+        </button>
+      </div>
+
 
       {/* Color Distribution */}
       <div
@@ -213,7 +233,9 @@ export default function Page() {
                 },
               ],
             }}
+            height={125} // Reduce height (adjust as needed)
             options={{
+              maintainAspectRatio: false, // Ensure height change is applied
               responsive: true,
               plugins: {
                 legend: {
@@ -261,18 +283,3 @@ export default function Page() {
     </div >
   );
 }
-
-const buttonStyles = (isActive) => ({
-  padding: "10px 15px",
-  fontSize: "16px",
-  fontWeight: "bold",
-  backgroundColor: isActive ? "#333" : "#ddd",
-  color: isActive ? "#fff" : "#aaa",
-  border: "none",
-  borderRadius: "6px",
-  cursor: isActive ? "pointer" : "not-allowed",
-  opacity: isActive ? "1" : "0.6",
-  minWidth: "60px",
-  textAlign: "center",
-  marginTop: "10px",
-});
