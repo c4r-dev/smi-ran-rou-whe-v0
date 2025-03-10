@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -93,11 +94,13 @@ export default function Page() {
             minHeight: "200px",
           }}
         >
-          <img
+          <Image
             src="/roulette-wheel.svg"
             alt="Roulette Wheel"
+            width={200} // Adjust based on the image dimensions
+            height={200} // Adjust based on the image dimensions
             style={{
-              maxWidth: "100%", // Ensures it scales properly
+              maxWidth: "100%",
               height: "auto",
               display: "block",
               margin: "0 auto",

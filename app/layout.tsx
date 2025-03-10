@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           {/* Title container for responsive width */}
           <div className="title-container">
             <h1 className="title">
-              Let's explore Roulette Wheel Results
+              Let&rsquo;s explore Roulette Wheel Results
             </h1>
           </div>
         </header>
