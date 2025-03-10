@@ -1,10 +1,19 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
+
 export default function FaviconButton() {
   return (
-    <a href="/" className="favicon-link">
-      <img src="/favicon.ico" alt="Favicon" className="favicon" />
-    </a>
+    <Link href="/" className="favicon-link">
+      <Image
+        src="/favicon.ico"
+        alt="Favicon"
+        width={40}
+        height={40}
+        className="favicon"
+        priority
+      />
+    </Link>
   );
 }
-
