@@ -267,19 +267,49 @@ export default function Page() {
       >
         NUMBER RUNS
       </h3>
-      <div
-        style={{
-          fontSize: "18px",
-          fontWeight: "bold",
-          color: "white",
-          backgroundColor: "red",
-          padding: "10px",
-          borderRadius: "50%",
-          display: "inline-block",
-        }}
-      >
-        {spins.length > 0 ? spins[spins.length - 1] : "-"}
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
+        {spins.length > 0 ? (
+          spins.slice(0, 25).map((num, index) => (
+            <div
+              key={index}
+              style={{
+                fontSize: "18px",
+                fontWeight: "bold",
+                color: "white",
+                backgroundColor: getColor(num), // Use color-coding function
+                padding: "10px",
+                borderRadius: "50%",
+                display: "inline-block",
+                width: "40px",
+                height: "40px",
+                textAlign: "center",
+                lineHeight: "40px",
+              }}
+            >
+              {num}
+            </div>
+          ))
+        ) : (
+          <div
+            style={{
+              fontSize: "18px",
+              fontWeight: "bold",
+              color: "white",
+              backgroundColor: "red",
+              padding: "10px",
+              borderRadius: "50%",
+              display: "inline-block",
+              width: "40px",
+              height: "40px",
+              textAlign: "center",
+              lineHeight: "40px",
+            }}
+          >
+            -
+          </div>
+        )}
       </div>
+
     </div >
   );
 }
