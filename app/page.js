@@ -36,7 +36,6 @@ export default function Page() {
 
   const totalSpins = spins.length || 1;
 
-  // Get unique numbers sorted
   const uniqueNumbers = Array.from(new Set(spins)).sort((a, b) => a - b);
   const colorMap = uniqueNumbers.map(getColor);
 
@@ -48,23 +47,49 @@ export default function Page() {
         data: uniqueNumbers.map(
           (num) => spins.filter((x) => x === num).length
         ),
-        backgroundColor: colorMap, // Use dynamic colors
+        backgroundColor: colorMap,
       },
     ],
   };
 
   return (
-    <div style={{ textAlign: "center", maxWidth: "600px", margin: "0 auto" }}>
-      <h2
+    <div style={{ textAlign: "center", maxWidth: "900px", margin: "0 auto", padding: "20px" }}>
+      {/* Flex container for heading and SVG */}
+      <div
         style={{
-          fontSize: "1.2rem",
-          fontWeight: "bold",
-          marginBottom: "20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "10px",
+          minHeight: "325px", // Increase height
+          height: "auto", // Allows flexibility
         }}
       >
-        Choose how many times you want to spin the wheel and think how the
-        distribution shows on the graphs below.
-      </h2>
+        <h2
+          style={{
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            marginBottom: "20px",
+          }}
+        >
+          Choose how many times you want to spin the wheel and think how the distribution shows on the graphs below.
+        </h2>
+
+        <div style={{ flex: "1", maxWidth: "33%", textAlign: "center", minHeight: "200px" }}>
+          <img
+            src="/roulette-wheel.svg"
+            alt="Roulette Wheel"
+            style={{
+              maxWidth: "150px",
+              height: "auto",
+              display: "block",
+              margin: "0 auto",
+              minHeight: "120px", // Ensures the SVG gets more height
+            }}
+          />
+        </div>
+      </div>
 
       <p
         style={{
@@ -73,14 +98,13 @@ export default function Page() {
           fontWeight: "bold",
           color: "#666",
           letterSpacing: "1px",
+          marginTop: "-20px",
         }}
       >
         Let’s spin the wheel
       </p>
 
-      <button onClick={handleSpin} style={buttonStyles(true)}>
-        1X
-      </button>
+      <button onClick={handleSpin} style={buttonStyles(true)}>1X</button>
 
       {/* Color Distribution */}
       <div
@@ -101,7 +125,6 @@ export default function Page() {
           COLOR DISTRIBUTION
         </h3>
 
-        {/* Flex container for color bars */}
         <div style={{ display: "flex", height: "15px", borderRadius: "5px", overflow: "hidden" }}>
           <div
             style={{
@@ -123,30 +146,30 @@ export default function Page() {
           ></div>
         </div>
 
-        {/* Display the percentage values */}
+        {/* Percentages Below */}
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
-            gap: "10px",
-            fontSize: "14px",
+            justifyContent: "space-between",
             marginTop: "5px",
+            fontSize: "12px",
+            fontWeight: "bold",
+            textAlign: "center",
           }}
         >
-          <span style={{ color: "red" }}>
-            🔴 <b>{Math.round((colorCounts.red / totalSpins) * 100)}%</b> RED
+          <span style={{ color: "red", flex: 1, textAlign: "left" }}>
+            {((colorCounts.red / totalSpins) * 100).toFixed(1)}%
           </span>
-          <span style={{ color: "black" }}>
-            ⚫ <b>{Math.round((colorCounts.black / totalSpins) * 100)}%</b> BLACK
+          <span style={{ color: "black", flex: 1, textAlign: "center" }}>
+            {((colorCounts.black / totalSpins) * 100).toFixed(1)}%
           </span>
-          <span style={{ color: "green" }}>
-            🟢 <b>{Math.round((colorCounts.green / totalSpins) * 100)}%</b> GREEN
+          <span style={{ color: "green", flex: 1, textAlign: "right" }}>
+            {((colorCounts.green / totalSpins) * 100).toFixed(1)}%
           </span>
         </div>
       </div>
 
-
-      {/* Number Distribution */}
+      {/* Number Distribution (Chart & SVG side by side) */}
       <h3
         style={{
           fontSize: "14px",
@@ -158,27 +181,23 @@ export default function Page() {
         NUMBER DISTRIBUTION
       </h3>
 
-      {/*
-        Here we add a flex container for the chart and the SVG side-by-side.
-        On narrow screens, flex-wrap will ensure they stack vertically.
-      */}
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
+          flexWrap: "nowrap",
+          justifyContent: "center",
           alignItems: "center",
-          gap: "20px",
+          gap: "10px",
         }}
       >
-        <div style={{ flex: "1 1 300px" }}>
+        <div style={{ flex: "1", maxWidth: "100%" }}>
           <Bar
             data={{
               ...chartData,
               datasets: [
                 {
                   ...chartData.datasets[0],
-                  label: "", // Remove the "Repetition" label
+                  label: "",
                 },
               ],
             }}
@@ -186,34 +205,21 @@ export default function Page() {
               responsive: true,
               plugins: {
                 legend: {
-                  display: false, // This removes the small colored bar (legend)
+                  display: false,
                 },
               },
               scales: {
                 y: {
                   beginAtZero: true,
                   ticks: {
-                    stepSize: 1, // Ensures whole number increments on Y-axis
+                    stepSize: 1,
                   },
                 },
               },
             }}
           />
+        </div>
 
-        </div>
-        <div style={{ flex: "1 1 300px", textAlign: "center" }}>
-          {/* Add the roulette-wheel SVG here. Ensure the path is correct. */}
-          <img
-            src="/roulette-wheel.svg"
-            alt="Roulette Wheel"
-            style={{
-              maxWidth: "300px",  // Adjust width to fit well
-              height: "auto",
-              display: "block",
-              margin: "0 auto"
-            }}
-          />
-        </div>
       </div>
 
       {/* Number Runs */}
@@ -240,7 +246,7 @@ export default function Page() {
       >
         {spins.length > 0 ? spins[spins.length - 1] : "-"}
       </div>
-    </div>
+    </div >
   );
 }
 
