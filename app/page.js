@@ -18,14 +18,14 @@ export default function Page() {
   const [spins, setSpins] = useState([]);
 
   const handleSpin = () => {
-    const newNumber = Math.floor(Math.random() * 16) + 1;
+    const newNumber = Math.floor(Math.random() * 17);
     setSpins([...spins, newNumber]);
   };
 
   const getColor = (num) => {
-    if ([1, 3, 5, 7, 9, 12, 14, 16].includes(num)) return "red";
-    if ([2, 4, 6, 8, 10, 11, 13, 15].includes(num)) return "black";
-    return "green";
+    if ([3, 4, 5, 7, 9, 11, 13, 15].includes(num)) return "red";
+    if ([1, 2, 6, 8, 10, 12, 14, 16].includes(num)) return "black";
+    if ([0].includes(num)) return "green";
   };
 
   const colorCounts = {
@@ -100,20 +100,37 @@ export default function Page() {
         >
           COLOR DISTRIBUTION
         </h3>
-        <div
-          style={{
-            height: "15px",
-            background: "red",
-            width: `${(colorCounts.red / totalSpins) * 100}%`,
-            marginBottom: "10px",
-          }}
-        ></div>
+
+        {/* Flex container for color bars */}
+        <div style={{ display: "flex", height: "15px", borderRadius: "5px", overflow: "hidden" }}>
+          <div
+            style={{
+              background: "red",
+              width: `${(colorCounts.red / totalSpins) * 100}%`,
+            }}
+          ></div>
+          <div
+            style={{
+              background: "black",
+              width: `${(colorCounts.black / totalSpins) * 100}%`,
+            }}
+          ></div>
+          <div
+            style={{
+              background: "green",
+              width: `${(colorCounts.green / totalSpins) * 100}%`,
+            }}
+          ></div>
+        </div>
+
+        {/* Display the percentage values */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             gap: "10px",
             fontSize: "14px",
+            marginTop: "5px",
           }}
         >
           <span style={{ color: "red" }}>
@@ -127,6 +144,7 @@ export default function Page() {
           </span>
         </div>
       </div>
+
 
       {/* Number Distribution */}
       <h3
@@ -155,14 +173,33 @@ export default function Page() {
       >
         <div style={{ flex: "1 1 300px" }}>
           <Bar
-            data={chartData}
+            data={{
+              ...chartData,
+              datasets: [
+                {
+                  ...chartData.datasets[0],
+                  label: "", // Remove the "Repetition" label
+                },
+              ],
+            }}
             options={{
               responsive: true,
+              plugins: {
+                legend: {
+                  display: false, // This removes the small colored bar (legend)
+                },
+              },
               scales: {
-                y: { beginAtZero: true },
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    stepSize: 1, // Ensures whole number increments on Y-axis
+                  },
+                },
               },
             }}
           />
+
         </div>
         <div style={{ flex: "1 1 300px", textAlign: "center" }}>
           {/* Add the roulette-wheel SVG here. Ensure the path is correct. */}
