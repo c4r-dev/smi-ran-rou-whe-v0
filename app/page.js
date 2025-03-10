@@ -59,11 +59,12 @@ export default function Page() {
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "center", // Distribute items evenly
           flexWrap: "wrap",
-          gap: "10px",
-          minHeight: "325px", // Increase height
-          height: "auto", // Allows flexibility
+          gap: "20px",
+          minHeight: "325px",
+          height: "auto",
+          width: "100%", // Ensure full width
         }}
       >
         <h2
@@ -71,25 +72,36 @@ export default function Page() {
             fontSize: "1.2rem",
             fontWeight: "bold",
             marginBottom: "20px",
+            flex: "2", // 66% width
+            maxWidth: "66%", // Limit to 66% of the space
+            textAlign: "center", // Center text
           }}
         >
           Choose how many times you want to spin the wheel and think how the distribution shows on the graphs below.
         </h2>
 
-        <div style={{ flex: "1", maxWidth: "33%", textAlign: "center", minHeight: "200px" }}>
+        <div
+          style={{
+            flex: "1", // 33% width
+            maxWidth: "33%", // Control the image size
+            textAlign: "center",
+            minHeight: "200px",
+          }}
+        >
           <img
             src="/roulette-wheel.svg"
             alt="Roulette Wheel"
             style={{
-              maxWidth: "150px",
+              maxWidth: "100%", // Ensures it scales properly
               height: "auto",
               display: "block",
               margin: "0 auto",
-              minHeight: "120px", // Ensures the SVG gets more height
+              minHeight: "120px",
             }}
           />
         </div>
       </div>
+
 
       <p
         style={{
@@ -104,7 +116,7 @@ export default function Page() {
         Let’s spin the wheel
       </p>
 
-      <button onClick={handleSpin} style={buttonStyles(true)}>1X</button>
+      <button onClick={handleSpin} className="compare-answer-button">1X</button>
 
       {/* Color Distribution */}
       <div

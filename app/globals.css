@@ -106,7 +106,7 @@ h2 {
 .compare-answer-button {
   display: block;
   width: 100%;
-  max-width: 250px;
+  max-width: 100px;
   text-align: center;
   margin: 10px auto;
   padding: 10px 5px;
@@ -118,6 +118,9 @@ h2 {
   border-radius: 6px;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+.compare-answer-button:hover {
+  background-color: #5700CA !important;
 }
 
 /* Disabled state */
