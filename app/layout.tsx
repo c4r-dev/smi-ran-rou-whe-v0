@@ -22,8 +22,7 @@ export default function RootLayout({ children }) {
         </header>
 
         {/* Main Content */}
-        {/* Ensure content is not covered by header */}
-        <main style={{ marginTop: "80px" }}>
+        <main style={{ marginTop: "60px" }}>
           {children}
         </main>
       </body>
