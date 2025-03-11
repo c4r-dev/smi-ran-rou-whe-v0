@@ -45,8 +45,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 0px; /* Reduce top padding */
-  padding-bottom: 5px; /* Keep some spacing */
+  padding-top: 0px;
+  /* Reduce top padding */
+  padding-bottom: 5px;
+  /* Keep some spacing */
 }
 
 .left-aligned-header {
@@ -289,8 +291,7 @@ h2 {
     /* Ensures header contents align left */
     flex-direction: column;
     text-align: center;
-    height: auto;
-    padding: 10px;
+    padding-top: 5px !important; /* Reduce space on mobile */
     flex-wrap: wrap;
     height: auto;
     align-items: center;
