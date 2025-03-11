@@ -28,7 +28,7 @@
 body {
   font-family: 'General Sans', Courier, sans-serif;
   margin: 0;
-  padding: 20px;
+  padding-top: 80px;
   box-sizing: border-box;
   color: #333;
   min-height: 100vh;
@@ -44,7 +44,7 @@ body {
 .header {
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: space-between;
   padding: 10px;
   position: fixed;
   top: 0;
@@ -100,34 +100,53 @@ h2 {
   width: 100%;
   padding: 20px;
   /* max-width: 1200px; */
-  margin: 0 auto;  /* Center it */
+  margin: 0 auto;
+  /* Center it */
 }
 
 .compare-answer-button {
-  display: block;
-  width: 100%;
-  max-width: 100px;
+  flex: 1;
+  /* Allows buttons to distribute evenly */
+  max-width: 120px;
+  /* Prevents oversized buttons */
+  min-width: 80px;
+  /* Ensures they don't shrink too much */
   text-align: center;
   margin: 10px auto;
   padding: 10px 5px;
   font-size: 16px;
   font-weight: bold;
-  background-color: #6F00FF; /* Purple */
+  background-color: #6F00FF;
+  /* Purple */
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
+
 .compare-answer-button:hover {
   background-color: #5700CA !important;
 }
 
 /* Disabled state */
 .compare-answer-button:disabled {
-  opacity: 0.4; /* 40% opacity */
+  opacity: 0.4;
+  /* 40% opacity */
   cursor: not-allowed;
   /* background-color: #a38be0; Lighter purple */
+}
+
+/* Ensure buttons are aligned horizontally */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* Space between buttons */
+  flex-wrap: wrap;
+  /* Allows wrapping on smaller screens */
+  margin-top: 10px;
 }
 
 /* Ensure 3 columns on large screens */
@@ -197,12 +216,15 @@ h2 {
 
 /* Styling for radio buttons */
 .radio-group input[type="radio"] {
-  appearance: none; /* Remove default styles */
+  appearance: none;
+  /* Remove default styles */
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid rgba(111, 0, 255, 0.4); /* 40% opacity of #6F00FF */
-  background-color: white; /* White inside */
+  border: 2px solid rgba(111, 0, 255, 0.4);
+  /* 40% opacity of #6F00FF */
+  background-color: white;
+  /* White inside */
   outline: none;
   display: inline-block;
   position: relative;
@@ -212,8 +234,10 @@ h2 {
 
 /* Full purple when selected */
 .radio-group input[type="radio"]:checked {
-  background-color: #6F00FF; /* Full purple */
-  border-color: #6F00FF; /* Full purple */
+  background-color: #6F00FF;
+  /* Full purple */
+  border-color: #6F00FF;
+  /* Full purple */
 }
 
 /* Ensure the label and radio button are aligned */
@@ -223,11 +247,13 @@ h2 {
   font-size: 16px;
   /* font-weight: bold; */
   cursor: pointer;
-  gap: 8px; /* Space between radio and text */
+  gap: 8px;
+  /* Space between radio and text */
 }
 
 .random-sequence-message {
-  background-color: rgba(111, 0, 255, 0.4); /* 40% opacity of button color */
+  background-color: rgba(111, 0, 255, 0.4);
+  /* 40% opacity of button color */
   color: black;
   font-size: 16px;
   font-weight: bold;
@@ -236,6 +262,35 @@ h2 {
   padding: 10px;
   border-radius: 6px;
   max-width: 250px;
+}
+
+/* Ensure buttons stack on smaller screens */
+@media (max-width: 600px) {
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .compare-answer-button {
+    width: 100%;
+  }
+
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .title-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .image-container {
+    margin-top: 20px; /* Push image down */
+  }
 }
 
 /* Responsive Adjustments */
@@ -248,6 +303,12 @@ h2 {
     flex-wrap: wrap;
     height: auto;
     align-items: center;
+  }
+
+  /* Improve Image Scaling */
+  .image-container img {
+    max-width: 80%;
+    height: auto;
   }
 
   .favicon-button {
@@ -304,7 +365,8 @@ h2 {
     padding: 0 10px;
   }
 
-  th, td {
+  th,
+  td {
     font-size: 14px;
     padding: 6px;
   }
@@ -327,7 +389,7 @@ h2 {
     display: flex;
     flex-direction: column;
   }
-  
+
   .regenerate-button {
     width: 100%;
     font-size: 14px;
@@ -335,6 +397,18 @@ h2 {
 
   .scrollable-table {
     max-height: 200px;
+  }
+
+  .button-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .compare-answer-button {
+    flex: 1 1 calc(50% - 10px);
+    /* Makes two buttons per row */
+    max-width: 100px;
   }
 
 }

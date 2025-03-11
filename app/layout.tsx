@@ -15,19 +15,17 @@ export default function RootLayout({ children }) {
       <body>
         {/* Header */}
         <header className="header">
-          {/* Using FaviconButton Client Component */}
           <FaviconButton />
-
-          {/* Title container for responsive width */}
           <div className="title-container">
-            <h1 className="title">
-              Let&rsquo;s explore Roulette Wheel Results
-            </h1>
+            <h1 className="title">Let&rsquo;s explore Roulette Wheel Results</h1>
           </div>
         </header>
 
         {/* Main Content */}
-        {children}
+        {/* Ensure content is not covered by header */}
+        <main style={{ marginTop: "80px" }}>
+          {children}
+        </main>
       </body>
     </html>
   );

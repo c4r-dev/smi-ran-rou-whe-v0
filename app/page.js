@@ -94,19 +94,21 @@ export default function Page() {
             minHeight: "200px",
           }}
         >
-          <Image
-            src="/roulette-wheel.svg"
-            alt="Roulette Wheel"
-            width={200} // Adjust based on the image dimensions
-            height={200} // Adjust based on the image dimensions
-            style={{
-              maxWidth: "100%",
-              height: "auto",
-              display: "block",
-              margin: "0 auto",
-              minHeight: "120px",
-            }}
-          />
+          <div className="image-container">
+            <Image
+              src="/roulette-wheel.svg"
+              alt="Roulette Wheel"
+              width={200} // Adjust based on the image dimensions
+              height={200} // Adjust based on the image dimensions
+              style={{
+                maxWidth: "100%",
+                height: "auto",
+                display: "block",
+                margin: "0 auto",
+                minHeight: "120px",
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -126,18 +128,13 @@ export default function Page() {
 
       {/* Button Container for Horizontal Layout */}
       <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginTop: "10px" }}>
-        <button onClick={() => handleSpin(1)} className="compare-answer-button">
-          1X
-        </button>
-        <button onClick={() => handleSpin(10)} className="compare-answer-button">
-          10X
-        </button>
-        <button onClick={() => handleSpin(100)} className="compare-answer-button">
-          100X
-        </button>
-        <button onClick={() => handleSpin(1000)} className="compare-answer-button">
-          1000X
-        </button>
+        <div className="button-container">
+          <button onClick={() => handleSpin(1)} className="compare-answer-button">1X</button>
+          <button onClick={() => handleSpin(10)} className="compare-answer-button">10X</button>
+          <button onClick={() => handleSpin(100)} className="compare-answer-button">100X</button>
+          <button onClick={() => handleSpin(1000)} className="compare-answer-button">1000X</button>
+        </div>
+
       </div>
 
 
