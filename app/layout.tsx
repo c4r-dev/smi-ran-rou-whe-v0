@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {/* Header */}
-        <header className="header">
+        <header className="header left-aligned-header">
           <FaviconButton />
           <div className="title-container">
             <h1 className="title">Let&rsquo;s explore Roulette Wheel Results</h1>

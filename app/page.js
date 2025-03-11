@@ -67,8 +67,8 @@ export default function Page() {
           alignItems: "center",
           justifyContent: "center", // Distribute items evenly
           flexWrap: "wrap",
-          gap: "20px",
-          minHeight: "325px",
+          gap: "10px",
+          minHeight: "150px",
           height: "auto",
           width: "100%", // Ensure full width
         }}
@@ -77,7 +77,7 @@ export default function Page() {
           style={{
             fontSize: "1.2rem",
             fontWeight: "bold",
-            marginBottom: "20px",
+            marginBottom: "50px",
             flex: "2", // 66% width
             maxWidth: "66%", // Limit to 66% of the space
             textAlign: "center", // Center text
