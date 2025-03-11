@@ -77,11 +77,15 @@ body {
 .title-container {
   flex-grow: 1;
   max-width: 80%;
+  text-align: left; /* Default: left-aligned */
+  display: flex;
+  align-items: center;
 }
 
 h1,
 .title {
   font-size: clamp(1.2rem, 3vw, 1.8rem);
+  margin: 0;
 }
 
 
@@ -285,7 +289,7 @@ h2 {
 
   .title-container {
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
 
   .image-container {
@@ -332,7 +336,8 @@ h2 {
   }
 
   .title-container {
-    text-align: center;
+    text-align: center; /* Center the text */
+    justify-content: center;
     width: 100%;
   }
 
