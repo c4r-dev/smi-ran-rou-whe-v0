@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         </header>
 
         {/* Main Content */}
-        <main style={{ marginTop: "60px" }}>
+        <main style={{ marginTop: "5px" }}>
           {children}
         </main>
       </body>
