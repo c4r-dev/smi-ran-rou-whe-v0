@@ -44,16 +44,8 @@ body {
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  z-index: 1000;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  height: 60px;
 }
 
 .favicon-button {
@@ -76,10 +68,12 @@ body {
 
 .title-container {
   flex-grow: 1;
-  max-width: 80%;
-  text-align: left; /* Default: left-aligned */
+  text-align: left;
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* Make sure it aligns to the left */
+  width: 100%;
+  padding-left: 0px !important; /* Remove any unnecessary padding */
 }
 
 h1,
@@ -153,16 +147,6 @@ h2 {
   margin-top: 10px;
 }
 
-/* Ensure 3 columns on large screens */
-@media (min-width: 1024px) {
-  .sequence-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .responsive-title {
-    justify-content: flex-start; /* Left-aligned on large screens */
-  }
-}
-
 /* Button Styling */
 .regenerate-button {
   display: flex;
@@ -202,9 +186,12 @@ h2 {
 }
 
 .responsive-title {
-  text-align: left; /* Default: Centered for small screens */
+  text-align: left;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start; /* Align left for larger screens */
+  width: 100%;
+  padding-left: 20px; /* Optional spacing */
 }
 
 /* Styling for radio buttons */
@@ -277,38 +264,12 @@ h2 {
   max-width: 250px;
 }
 
-/* Ensure buttons stack on smaller screens */
-@media (max-width: 600px) {
-  .button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .compare-answer-button {
-    width: 100%;
-  }
-
-  .header {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .title-container {
-    width: 100%;
-    text-align: left;
-  }
-
-  .image-container {
-    margin-top: 20px; /* Push image down */
-  }
-}
-
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+
   .header {
+    justify-content: flex-start !important;
+    /* Ensures header contents align left */
     flex-direction: column;
     text-align: center;
     height: auto;
@@ -344,10 +305,15 @@ h2 {
     max-width: 250px;
   }
 
+  .title {
+    text-align: left !important;
+    width: 100% !important;
+  }
+
   .title-container {
-    text-align: center; /* Center the text */
-    justify-content: center;
-    width: 100%;
+    justify-content: center !important;
+    text-align: center !important;
+    padding-left: 0 !important;
   }
 
   h1 {
@@ -384,6 +350,13 @@ h2 {
     font-size: 14px;
     padding: 6px;
   }
+
+  .responsive-title {
+    text-align: center !important;
+    justify-content: center !important;/* Center for smaller screens */
+    padding-left: 0 !important;
+  }
+
 }
 
 @media (max-width: 480px) {

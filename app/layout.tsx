@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         {/* Header */}
         <header className="header">
           <FaviconButton />
-          <div className="title-container responsive-title">
+          <div className="title-container">
             <h1 className="title">Let&rsquo;s explore Roulette Wheel Results</h1>
           </div>
         </header>
