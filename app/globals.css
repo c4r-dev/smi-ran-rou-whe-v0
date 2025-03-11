@@ -158,6 +158,9 @@ h2 {
   .sequence-container {
     grid-template-columns: repeat(3, 1fr);
   }
+  .responsive-title {
+    justify-content: flex-start; /* Left-aligned on large screens */
+  }
 }
 
 /* Button Styling */
@@ -196,6 +199,12 @@ h2 {
   font-size: clamp(16px, 4vw, 22px);
   padding: 0 0%;
   margin: 120px auto 20px auto;
+}
+
+.responsive-title {
+  text-align: left; /* Default: Centered for small screens */
+  display: flex;
+  justify-content: center;
 }
 
 /* Styling for radio buttons */
