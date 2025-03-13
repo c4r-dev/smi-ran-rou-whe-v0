@@ -22,13 +22,20 @@ const COLORS = {
   GREEN: [0],
 };
 
+const COLOR_HEX = {
+  RED: "var(--color-red)",
+  BLACK: "var(--color-black)",
+  GREEN: "var(--color-green)",
+};
+
 // Helper function moved outside the component
 const getColor = (num) => {
-  if (COLORS.RED.includes(num)) return "#FF5A00";
-  if (COLORS.BLACK.includes(num)) return "#020202";
-  if (COLORS.GREEN.includes(num)) return "#00C802";
+  if (COLORS.RED.includes(num)) return COLOR_HEX.RED;
+  if (COLORS.BLACK.includes(num)) return COLOR_HEX.BLACK;
+  if (COLORS.GREEN.includes(num)) return COLOR_HEX.GREEN;
   return "gray"; // Fallback color
 };
+
 
 export default function Page() {
   const [spins, setSpins] = useState([]);
@@ -46,9 +53,9 @@ export default function Page() {
   // Using useMemo to optimize calculations
   const statistics = useMemo(() => {
     const colorCounts = {
-      red: spins.filter((num) => getColor(num) === "red").length,
-      black: spins.filter((num) => getColor(num) === "black").length,
-      green: spins.filter((num) => getColor(num) === "green").length,
+      [COLOR_HEX.RED]: spins.filter((num) => getColor(num) === COLOR_HEX.RED).length,
+      [COLOR_HEX.BLACK]: spins.filter((num) => getColor(num) === COLOR_HEX.BLACK).length,
+      [COLOR_HEX.GREEN]: spins.filter((num) => getColor(num) === COLOR_HEX.GREEN).length,
     };
 
     const totalSpins = spins.length || 1;
@@ -63,6 +70,8 @@ export default function Page() {
     };
   }, [spins]);
 
+  // console.log("Color Map Array: ", statistics.colorMap);
+
   // Chart data preparation using memoization
   const chartData = useMemo(() => {
     return {
@@ -73,7 +82,9 @@ export default function Page() {
           data: statistics.uniqueNumbers.map(
             (num) => spins.filter((x) => x === num).length
           ),
-          backgroundColor: statistics.colorMap,
+          backgroundColor: statistics.uniqueNumbers.map(getColor), // Assign colors dynamically
+          borderColor: statistics.uniqueNumbers.map(getColor),
+          borderWidth: 1,
         },
       ],
     };
@@ -207,15 +218,16 @@ export default function Page() {
             textAlign: "center",
           }}
         >
-          <span style={{ color: "red", flex: 1, textAlign: "left" }}>
-            {((statistics.colorCounts.red / statistics.totalSpins) * 100).toFixed(1)}%
+          <span style={{ color: COLOR_HEX.RED, flex: 1, textAlign: "left" }}>
+            {((statistics.colorCounts[COLOR_HEX.RED] / statistics.totalSpins) * 100).toFixed(1)}%
           </span>
-          <span style={{ color: "black", flex: 1, textAlign: "center" }}>
-            {((statistics.colorCounts.black / statistics.totalSpins) * 100).toFixed(1)}%
+          <span style={{ color: COLOR_HEX.BLACK, flex: 1, textAlign: "center" }}>
+            {((statistics.colorCounts[COLOR_HEX.BLACK] / statistics.totalSpins) * 100).toFixed(1)}%
           </span>
-          <span style={{ color: "green", flex: 1, textAlign: "right" }}>
-            {((statistics.colorCounts.green / statistics.totalSpins) * 100).toFixed(1)}%
+          <span style={{ color: COLOR_HEX.GREEN, flex: 1, textAlign: "right" }}>
+            {((statistics.colorCounts[COLOR_HEX.GREEN] / statistics.totalSpins) * 100).toFixed(1)}%
           </span>
+
         </div>
       </div>
 
