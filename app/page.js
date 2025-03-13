@@ -119,9 +119,10 @@ export default function Page() {
             <Image
               src="/roulette-wheel.svg"
               alt="Roulette Wheel"
-              width={200}
-              height={200}
+              width={300}
+              height={300}
               style={{
+                transform: "rotate(11deg)",
                 maxWidth: "100%",
                 height: "auto",
                 display: "block",
