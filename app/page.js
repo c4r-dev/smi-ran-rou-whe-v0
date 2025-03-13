@@ -144,16 +144,16 @@ export default function Page() {
           marginTop: "-20px",
         }}
       >
-        Let's spin the wheel
+        Let&apos;s spin the wheel
       </p>
 
       {/* Button Container for Horizontal Layout */}
       <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginTop: "10px" }}>
         <div className="button-container">
           {[1, 10, 100, 1000].map(times => (
-            <button 
+            <button
               key={times}
-              onClick={() => handleSpin(times)} 
+              onClick={() => handleSpin(times)}
               className="compare-answer-button"
               aria-label={`Spin ${times} times`}
             >
