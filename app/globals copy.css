@@ -1,42 +1,9 @@
-:root {
-  /* Color variables */
-  --color-primary: #6F00FF;
-  --color-primary-hover: #5700CA;
-  --color-primary-disabled: rgba(111, 0, 255, 0.4);
-  --color-text: #333;
-  --color-background: #f9f9f9;
-  --color-secondary: #f0f0f0;
-  --color-light-text: #666;
-  --color-border: #ddd;
-  
-  /* Typography */
-  --font-family-primary: 'General Sans', Courier, sans-serif;
-  --font-family-code: 'JetBrains Mono', monospace;
-  --font-size-xs: 0.9rem;
-  --font-size-sm: 1rem;
-  --font-size-md: 1.2rem;
-  --font-size-lg: 1.8rem;
-  
-  /* Spacing */
-  --spacing-xs: 5px;
-  --spacing-sm: 10px;
-  --spacing-md: 20px;
-  --spacing-lg: 40px;
-  --spacing-xl: 80px;
-  
-  /* Border radii */
-  --border-radius-sm: 5px;
-  --border-radius-md: 6px;
-  --border-radius-circle: 50%;
-}
-
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans/GeneralSans-Regular.woff2') format('woff2'),
     url('/fonts/GeneralSans/GeneralSans-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-  font-display: swap; /* Improved font loading */
 }
 
 @font-face {
@@ -45,7 +12,6 @@
     url('/fonts/GeneralSans/GeneralSans-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
@@ -53,25 +19,24 @@
   src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
 
 * {
   text-wrap: balance;
-  box-sizing: border-box;
 }
 
 body {
-  font-family: var(--font-family-primary);
+  font-family: 'General Sans', Courier, sans-serif;
   margin: 0;
-  padding-top: var(--spacing-sm);
-  color: var(--color-text);
+  padding-top: 10px;
+  box-sizing: border-box;
+  color: #333;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-background);
+  background-color: #f9f9f9;
   line-height: 1.6;
 }
 
@@ -80,16 +45,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 0;
-  padding-bottom: var(--spacing-xs);
+  padding-top: 0px;
+  /* Reduce top padding */
+  padding-bottom: 5px;
+  /* Keep some spacing */
 }
 
 .left-aligned-header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  /* Aligns elements to the left */
   width: 100%;
-  padding-left: var(--spacing-md);
+  padding-left: 20px;
+  /* Adjust spacing from the left */
 }
 
 .favicon-button {
@@ -101,14 +70,13 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
-  margin-right: var(--spacing-sm);
-  cursor: pointer;
+  margin-right: 10px;
 }
 
 .favicon {
   width: 40px;
   height: 40px;
-  margin-right: var(--spacing-sm);
+  margin-right: 10px;
   display: block;
 }
 
@@ -118,60 +86,70 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  /* Make sure it aligns to the left */
   width: 100%;
-  padding-left: 0 !important;
+  padding-left: 0px !important;
+  /* Remove any unnecessary padding */
 }
 
-/* Typography */
-h1, .title {
+h1,
+.title {
   font-size: clamp(1.2rem, 3vw, 1.8rem);
   text-align: left;
   margin: 0;
 }
 
+
 h2 {
-  font-size: var(--font-size-md);
+  font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
-  margin-top: var(--spacing-xl);
+  margin-top: 80px;
   padding: 0 10%;
 }
 
 .sequence-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-md);
+  gap: 20px;
   width: 100%;
-  padding: var(--spacing-md);
+  padding: 20px;
+  /* max-width: 1200px; */
   margin: 0 auto;
+  /* Center it */
 }
 
-/* Button Styling */
 .compare-answer-button {
   flex: 1;
+  /* Allows buttons to distribute evenly */
   max-width: 120px;
+  /* Prevents oversized buttons */
   min-width: 80px;
+  /* Ensures they don't shrink too much */
   text-align: center;
-  margin: var(--spacing-sm) auto;
-  padding: var(--spacing-sm) var(--spacing-xs);
+  margin: 10px auto;
+  padding: 10px 5px;
   font-size: 16px;
   font-weight: bold;
-  background-color: var(--color-primary);
+  background-color: #6F00FF;
+  /* Purple */
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: 6px;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .compare-answer-button:hover {
-  background-color: var(--color-primary-hover) !important;
+  background-color: #5700CA !important;
 }
 
 /* Disabled state */
 .compare-answer-button:disabled {
   opacity: 0.4;
+  /* 40% opacity */
   cursor: not-allowed;
+  /* background-color: #a38be0; Lighter purple */
 }
 
 /* Ensure buttons are aligned horizontally */
@@ -179,11 +157,14 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 10px;
+  /* Space between buttons */
   flex-wrap: wrap;
-  margin-top: var(--spacing-sm);
+  /* Allows wrapping on smaller screens */
+  margin-top: 10px;
 }
 
+/* Button Styling */
 .regenerate-button {
   display: flex;
   justify-content: center;
@@ -192,19 +173,19 @@ h2 {
   width: 100%;
   max-width: 250px;
   text-align: center;
-  margin: var(--spacing-sm) auto;
-  padding: 8px var(--spacing-xs);
+  margin: 10px auto;
+  padding: 8px 5px;
   font-size: 16px;
   font-weight: bold;
-  background-color: var(--color-primary);
+  background-color: #6F00FF;
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: 6px;
   cursor: pointer;
 }
 
 .regenerate-button:hover {
-  background-color: var(--color-primary-hover) !important;
+  background-color: #5700CA !important;
 }
 
 .responsive-text {
@@ -218,7 +199,7 @@ h2 {
   overflow-wrap: break-word;
   font-size: clamp(16px, 4vw, 22px);
   padding: 0 0%;
-  margin: 120px auto var(--spacing-md) auto;
+  margin: 120px auto 20px auto;
 }
 
 .responsive-title {
@@ -226,11 +207,14 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  /* Align left for larger screens */
   width: 100%;
-  padding-left: var(--spacing-md);
+  padding-left: 20px;
+  /* Optional spacing */
 }
 
 /* Styling for radio buttons */
+/* Centering the radio-container */
 .radio-container {
   display: flex;
   flex-direction: column;
@@ -238,9 +222,10 @@ h2 {
   justify-content: center;
   text-align: center;
   width: 100%;
-  margin-top: var(--spacing-md);
+  margin-top: 20px;
 }
 
+/* Centering radio-group */
 .radio-group {
   display: flex;
   flex-wrap: wrap;
@@ -248,13 +233,17 @@ h2 {
   gap: 15px;
 }
 
+/* Styling for radio buttons */
 .radio-group input[type="radio"] {
   appearance: none;
+  /* Remove default styles */
   width: 20px;
   height: 20px;
-  border-radius: var(--border-radius-circle);
-  border: 2px solid var(--color-primary-disabled);
+  border-radius: 50%;
+  border: 2px solid rgba(111, 0, 255, 0.4);
+  /* 40% opacity of #6F00FF */
   background-color: white;
+  /* White inside */
   outline: none;
   display: inline-block;
   position: relative;
@@ -262,50 +251,60 @@ h2 {
   transition: all 0.2s ease-in-out;
 }
 
+/* Full purple when selected */
 .radio-group input[type="radio"]:checked {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: #6F00FF;
+  /* Full purple */
+  border-color: #6F00FF;
+  /* Full purple */
 }
 
+/* Ensure the label and radio button are aligned */
 .radio-group label {
   display: flex;
   align-items: center;
   font-size: 16px;
+  /* font-weight: bold; */
   cursor: pointer;
   gap: 8px;
+  /* Space between radio and text */
 }
 
 .random-sequence-message {
-  background-color: var(--color-primary-disabled);
+  background-color: rgba(111, 0, 255, 0.4);
+  /* 40% opacity of button color */
   color: black;
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  margin-top: var(--spacing-sm);
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius-md);
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
   max-width: 250px;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+
   .header {
     justify-content: flex-start !important;
+    /* Ensures header contents align left */
     flex-direction: column;
     text-align: center;
-    padding-top: var(--spacing-xs) !important;
+    padding-top: 5px !important; /* Reduce space on mobile */
     flex-wrap: wrap;
     height: auto;
     align-items: center;
   }
 
+  /* Improve Image Scaling */
   .image-container img {
     max-width: 80%;
     height: auto;
   }
 
   .favicon-button {
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 10px;
   }
 
   .sequence-container {
@@ -330,6 +329,7 @@ h2 {
     justify-content: center;
     text-align: center;
     padding-left: 0;
+    /* Reset padding for smaller screens */
   }
 
   .title {
@@ -356,19 +356,20 @@ h2 {
     font-size: 14px;
     padding-top: 50px 0 0 0;
     margin-top: 100px;
+    /* Less space for medium screens */
   }
 
   .scrollable-table {
     max-height: 250px;
     overflow-x: auto;
-    border: 1px solid var(--color-border);
+    border: 1px solid #ddd;
     width: 100%;
-    border-radius: var(--border-radius-sm);
+    border-radius: 5px;
   }
 
   .table-container {
     max-width: 100%;
-    padding: 0 var(--spacing-sm);
+    padding: 0 10px;
   }
 
   th,
@@ -380,13 +381,16 @@ h2 {
   .responsive-title {
     text-align: center !important;
     justify-content: center !important;
+    /* Center for smaller screens */
     padding-left: 0 !important;
   }
+
 }
 
 @media (max-width: 480px) {
+
   h2 {
-    font-size: var(--font-size-sm);
+    font-size: 1rem;
     padding: 0 5%;
   }
 
@@ -418,6 +422,8 @@ h2 {
 
   .compare-answer-button {
     flex: 1 1 calc(50% - 10px);
+    /* Makes two buttons per row */
     max-width: 100px;
   }
+
 }
