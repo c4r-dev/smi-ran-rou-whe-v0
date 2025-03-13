@@ -8,6 +8,9 @@
   --color-secondary: #f0f0f0;
   --color-light-text: #666;
   --color-border: #ddd;
+  --color-green: #00C802;
+  --color-black: #020202;
+  --color-red: #FF5A00;
   
   /* Typography */
   --font-family-primary: 'General Sans', Courier, sans-serif;
@@ -277,7 +280,7 @@ h2 {
 
 .random-sequence-message {
   background-color: var(--color-primary-disabled);
-  color: black;
+  color: var(--color-black);
   font-size: 16px;
   font-weight: bold;
   text-align: center;

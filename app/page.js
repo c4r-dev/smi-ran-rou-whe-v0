@@ -24,9 +24,9 @@ const COLORS = {
 
 // Helper function moved outside the component
 const getColor = (num) => {
-  if (COLORS.RED.includes(num)) return "red";
-  if (COLORS.BLACK.includes(num)) return "black";
-  if (COLORS.GREEN.includes(num)) return "green";
+  if (COLORS.RED.includes(num)) return "#FF5A00";
+  if (COLORS.BLACK.includes(num)) return "#020202";
+  if (COLORS.GREEN.includes(num)) return "#00C802";
   return "gray"; // Fallback color
 };
 
