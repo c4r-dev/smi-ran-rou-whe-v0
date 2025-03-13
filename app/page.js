@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { Bar } from "react-chartjs-2";
 import {
@@ -22,23 +22,35 @@ const COLORS = {
   GREEN: [0],
 };
 
-const COLOR_HEX = {
-  RED: "var(--color-red)",
-  BLACK: "var(--color-black)",
-  GREEN: "var(--color-green)",
+const getCSSVariable = (variable) => {
+  return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
 };
-
-// Helper function moved outside the component
-const getColor = (num) => {
-  if (COLORS.RED.includes(num)) return COLOR_HEX.RED;
-  if (COLORS.BLACK.includes(num)) return COLOR_HEX.BLACK;
-  if (COLORS.GREEN.includes(num)) return COLOR_HEX.GREEN;
-  return "gray"; // Fallback color
-};
-
 
 export default function Page() {
+
   const [spins, setSpins] = useState([]);
+
+  const [colorHex, setColorHex] = useState({
+    RED: "#FF5A00", // Default fallback color
+    BLACK: "#020202",
+    GREEN: "#00C802",
+  });
+
+  useEffect(() => {
+    setColorHex({
+      RED: getCSSVariable("--color-red"),
+      BLACK: getCSSVariable("--color-black"),
+      GREEN: getCSSVariable("--color-green"),
+    });
+  }, []);
+
+  // Now use colorHex instead of COLOR_HEX
+  const getColor = (num) => {
+    if (COLORS.RED.includes(num)) return colorHex.RED;
+    if (COLORS.BLACK.includes(num)) return colorHex.BLACK;
+    if (COLORS.GREEN.includes(num)) return colorHex.GREEN;
+    return "gray"; // Fallback color
+  };
 
   // Using useCallback to prevent unnecessary re-renders
   const handleSpin = useCallback((times = 1) => {
@@ -51,11 +63,12 @@ export default function Page() {
   }, []);
 
   // Using useMemo to optimize calculations
+
   const statistics = useMemo(() => {
     const colorCounts = {
-      [COLOR_HEX.RED]: spins.filter((num) => getColor(num) === COLOR_HEX.RED).length,
-      [COLOR_HEX.BLACK]: spins.filter((num) => getColor(num) === COLOR_HEX.BLACK).length,
-      [COLOR_HEX.GREEN]: spins.filter((num) => getColor(num) === COLOR_HEX.GREEN).length,
+      [colorHex.RED]: spins.filter((num) => getColor(num) === colorHex.RED).length,
+      [colorHex.BLACK]: spins.filter((num) => getColor(num) === colorHex.BLACK).length,
+      [colorHex.GREEN]: spins.filter((num) => getColor(num) === colorHex.GREEN).length,
     };
 
     const totalSpins = spins.length || 1;
@@ -68,7 +81,7 @@ export default function Page() {
       uniqueNumbers,
       colorMap,
     };
-  }, [spins]);
+  }, [spins, colorHex]); // Add `colorHex` as a dependency
 
   // console.log("Color Map Array: ", statistics.colorMap);
 
@@ -82,7 +95,7 @@ export default function Page() {
           data: statistics.uniqueNumbers.map(
             (num) => spins.filter((x) => x === num).length
           ),
-          backgroundColor: statistics.uniqueNumbers.map(getColor), // Assign colors dynamically
+          backgroundColor: statistics.uniqueNumbers.map(getColor),
           borderColor: statistics.uniqueNumbers.map(getColor),
           borderWidth: 1,
         },
@@ -218,14 +231,14 @@ export default function Page() {
             textAlign: "center",
           }}
         >
-          <span style={{ color: COLOR_HEX.RED, flex: 1, textAlign: "left" }}>
-            {((statistics.colorCounts[COLOR_HEX.RED] / statistics.totalSpins) * 100).toFixed(1)}%
+          <span style={{ color: colorHex.RED, flex: 1, textAlign: "left" }}>
+            {((statistics.colorCounts[colorHex.RED] / statistics.totalSpins) * 100).toFixed(1)}%
           </span>
-          <span style={{ color: COLOR_HEX.BLACK, flex: 1, textAlign: "center" }}>
-            {((statistics.colorCounts[COLOR_HEX.BLACK] / statistics.totalSpins) * 100).toFixed(1)}%
+          <span style={{ color: colorHex.BLACK, flex: 1, textAlign: "center" }}>
+            {((statistics.colorCounts[colorHex.BLACK] / statistics.totalSpins) * 100).toFixed(1)}%
           </span>
-          <span style={{ color: COLOR_HEX.GREEN, flex: 1, textAlign: "right" }}>
-            {((statistics.colorCounts[COLOR_HEX.GREEN] / statistics.totalSpins) * 100).toFixed(1)}%
+          <span style={{ color: colorHex.GREEN, flex: 1, textAlign: "right" }}>
+            {((statistics.colorCounts[colorHex.GREEN] / statistics.totalSpins) * 100).toFixed(1)}%
           </span>
 
         </div>
