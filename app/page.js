@@ -23,25 +23,36 @@ const COLORS = {
   GREEN: [0],
 };
 
+// Default colors that will be used before client-side initialization
+const DEFAULT_COLORS = {
+  RED: "#FF5A00",
+  BLACK: "#020202",
+  GREEN: "#00C802",
+};
+
+// Move getCSSVariable inside a useEffect to ensure it only runs on client
 const getCSSVariable = (variable) => {
-  return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+  }
+  return '';
 };
 
 export default function Page() {
-
   const [spins, setSpins] = useState([]);
 
   const [colorHex, setColorHex] = useState({
-    RED: "#FF5A00", // Default fallback color
-    BLACK: "#020202",
-    GREEN: "#00C802",
+    RED: DEFAULT_COLORS.RED,
+    BLACK: DEFAULT_COLORS.BLACK,
+    GREEN: DEFAULT_COLORS.GREEN,
   });
 
   useEffect(() => {
+    // This will only run on the client side
     setColorHex({
-      RED: getCSSVariable("--color-red"),
-      BLACK: getCSSVariable("--color-black"),
-      GREEN: getCSSVariable("--color-green"),
+      RED: getCSSVariable("--color-red") || DEFAULT_COLORS.RED,
+      BLACK: getCSSVariable("--color-black") || DEFAULT_COLORS.BLACK,
+      GREEN: getCSSVariable("--color-green") || DEFAULT_COLORS.GREEN,
     });
   }, []);
 
@@ -63,8 +74,6 @@ export default function Page() {
     setSpins(newSpins);
   }, []);
 
-  // Using useMemo to optimize calculations
-
   const statistics = useMemo(() => {
     const colorCounts = {
       [colorHex.RED]: spins.filter((num) => getColor(num) === colorHex.RED).length,
@@ -83,8 +92,6 @@ export default function Page() {
       colorMap,
     };
   }, [spins, colorHex, getColor]); // Added getColor as a dependency
-
-  // console.log("Color Map Array: ", statistics.colorMap);
 
   // Chart data preparation using memoization
   const chartData = useMemo(() => {
