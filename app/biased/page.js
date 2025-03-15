@@ -71,7 +71,7 @@ export default function BiasedPage() {
       // Biased spinning mechanism - red numbers are more likely to appear
       const randomValue = Math.random();
       let newNumber;
-      
+
       if (randomValue < 0.6) {
         // 60% chance to get a red number
         const redNumbers = COLORS.RED;
@@ -84,7 +84,7 @@ export default function BiasedPage() {
         // 10% chance to get green (0)
         newNumber = 0;
       }
-      
+
       newSpins.push(newNumber);
     }
     setSpins(newSpins);
@@ -133,15 +133,15 @@ export default function BiasedPage() {
       {/* Back to regular wheel button */}
       <div style={{ display: "flex", justifyContent: "flex-start", width: "100%", marginBottom: "20px" }}>
         <Link href="/">
-          <button 
-            className="compare-answer-button" 
+          <button
+            className="compare-answer-button"
             style={{ backgroundColor: colorHex.GREEN }}
           >
             Regular Wheel
           </button>
         </Link>
       </div>
-      
+
       {/* Flex container for heading and SVG */}
       <div
         style={{
@@ -174,17 +174,33 @@ export default function BiasedPage() {
             maxWidth: "33%",
             textAlign: "center",
             minHeight: "200px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
-          <div className="image-container" style={{ width: "300px", height: "300px", position: "relative", margin: "0 auto" }}>
+          <div
+            className="image-container"
+            style={{
+              width: "250px",
+              height: "250px",
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              overflow: "hidden"
+            }}
+          >
             <Image
               src="/broken-wheel.svg"
               alt="Broken Roulette Wheel"
-              fill
+              width={200}
+              height={200}
               style={{
                 transform: "rotate(11deg)",
                 objectFit: "contain",
-                objectPosition: "center",
+                maxWidth: "100%",
+                maxHeight: "100%",
               }}
               priority
             />

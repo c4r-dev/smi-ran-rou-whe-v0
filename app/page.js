@@ -116,8 +116,8 @@ export default function Page() {
       {/* Biased Wheel Navigation Button */}
       <div style={{ display: "flex", justifyContent: "flex-end", width: "100%", marginBottom: "20px" }}>
         <Link href="/biased">
-          <button 
-            className="compare-answer-button" 
+          <button
+            className="compare-answer-button"
             style={{ backgroundColor: colorHex.RED }}
           >
             Try Biased Wheel
@@ -157,17 +157,33 @@ export default function Page() {
             maxWidth: "33%",
             textAlign: "center",
             minHeight: "200px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
-          <div className="image-container" style={{ width: "300px", height: "300px", position: "relative", margin: "0 auto" }}>
+          <div
+            className="image-container"
+            style={{
+              width: "250px",
+              height: "250px",
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              overflow: "hidden"
+            }}
+          >
             <Image
               src="/roulette-wheel.svg"
               alt="Roulette Wheel"
-              fill
+              width={200}
+              height={200}
               style={{
                 transform: "rotate(11deg)",
                 objectFit: "contain",
-                objectPosition: "center",
+                maxWidth: "100%",
+                maxHeight: "100%",
               }}
               priority
             />
