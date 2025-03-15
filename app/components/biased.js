@@ -44,13 +44,13 @@ export default function BiasedPage() {
     });
   }, []);
 
-  // Now use colorHex instead of COLOR_HEX
-  const getColor = (num) => {
+  // Use colorHex instead of COLOR_HEX
+  const getColor = useCallback((num) => {
     if (COLORS.RED.includes(num)) return colorHex.RED;
     if (COLORS.BLACK.includes(num)) return colorHex.BLACK;
     if (COLORS.GREEN.includes(num)) return colorHex.GREEN;
     return "gray"; // Fallback color
-  };
+  }, [colorHex]);
 
   // Using useCallback to prevent unnecessary re-renders
   const handleSpin = useCallback((times = 1) => {
@@ -96,7 +96,7 @@ export default function BiasedPage() {
       uniqueNumbers,
       colorMap,
     };
-  }, [spins, colorHex]); // Add `colorHex` as a dependency
+  }, [spins, colorHex, getColor]); // Add `getColor` as a dependency
 
   // Chart data preparation using memoization
   const chartData = useMemo(() => {
@@ -114,7 +114,7 @@ export default function BiasedPage() {
         },
       ],
     };
-  }, [statistics, spins]);
+  }, [statistics, spins, getColor]);
 
   return (
     <div style={{ textAlign: "center", maxWidth: "900px", margin: "0 auto", padding: "20px" }}>
@@ -153,7 +153,7 @@ export default function BiasedPage() {
             textAlign: "center",
           }}
         >
-          This wheel is broken! It doesn't spin fairly. Try it out and see how the distributions differ from the normal wheel.
+          This wheel is broken! It doesn&apos;t spin fairly. Try it out and see how the distributions differ from the normal wheel.
         </h2>
 
         <div
