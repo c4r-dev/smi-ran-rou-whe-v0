@@ -45,13 +45,13 @@ export default function Page() {
     });
   }, []);
 
-  // Now use colorHex instead of COLOR_HEX
-  const getColor = (num) => {
+  // Use colorHex instead of COLOR_HEX
+  const getColor = useCallback((num) => {
     if (COLORS.RED.includes(num)) return colorHex.RED;
     if (COLORS.BLACK.includes(num)) return colorHex.BLACK;
     if (COLORS.GREEN.includes(num)) return colorHex.GREEN;
     return "gray"; // Fallback color
-  };
+  }, [colorHex]);
 
   // Using useCallback to prevent unnecessary re-renders
   const handleSpin = useCallback((times = 1) => {
@@ -82,7 +82,7 @@ export default function Page() {
       uniqueNumbers,
       colorMap,
     };
-  }, [spins, colorHex]); // Add `colorHex` as a dependency
+  }, [spins, colorHex, getColor]); // Added getColor as a dependency
 
   // console.log("Color Map Array: ", statistics.colorMap);
 
@@ -102,7 +102,7 @@ export default function Page() {
         },
       ],
     };
-  }, [statistics, spins]);
+  }, [statistics, spins, getColor]);
 
   return (
     <div style={{ textAlign: "center", maxWidth: "900px", margin: "0 auto", padding: "20px" }}>

@@ -27,7 +27,8 @@ const getCSSVariable = (variable) => {
   return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
 };
 
-export default function BiasedPage() {
+export default function Page() {
+
   const [spins, setSpins] = useState([]);
 
   const [colorHex, setColorHex] = useState({
@@ -56,29 +57,14 @@ export default function BiasedPage() {
   const handleSpin = useCallback((times = 1) => {
     const newSpins = [];
     for (let i = 0; i < times; i++) {
-      // Biased spinning mechanism - red numbers are more likely to appear
-      const randomValue = Math.random();
-      let newNumber;
-      
-      if (randomValue < 0.6) {
-        // 60% chance to get a red number
-        const redNumbers = COLORS.RED;
-        newNumber = redNumbers[Math.floor(Math.random() * redNumbers.length)];
-      } else if (randomValue < 0.9) {
-        // 30% chance to get a black number
-        const blackNumbers = COLORS.BLACK;
-        newNumber = blackNumbers[Math.floor(Math.random() * blackNumbers.length)];
-      } else {
-        // 10% chance to get green (0)
-        newNumber = 0;
-      }
-      
+      const newNumber = Math.floor(Math.random() * 17);
       newSpins.push(newNumber);
     }
     setSpins(newSpins);
   }, []);
 
   // Using useMemo to optimize calculations
+
   const statistics = useMemo(() => {
     const colorCounts = {
       [colorHex.RED]: spins.filter((num) => getColor(num) === colorHex.RED).length,
@@ -96,7 +82,9 @@ export default function BiasedPage() {
       uniqueNumbers,
       colorMap,
     };
-  }, [spins, colorHex, getColor]); // Add `getColor` as a dependency
+  }, [spins, colorHex, getColor]); // Added getColor as a dependency
+
+  // console.log("Color Map Array: ", statistics.colorMap);
 
   // Chart data preparation using memoization
   const chartData = useMemo(() => {
@@ -118,18 +106,18 @@ export default function BiasedPage() {
 
   return (
     <div style={{ textAlign: "center", maxWidth: "900px", margin: "0 auto", padding: "20px" }}>
-      {/* Back to regular wheel button */}
-      <div style={{ display: "flex", justifyContent: "flex-start", width: "100%", marginBottom: "20px" }}>
-        <Link href="/">
+      {/* Biased Wheel Navigation Button */}
+      <div style={{ display: "flex", justifyContent: "flex-end", width: "100%", marginBottom: "20px" }}>
+        <Link href="/biased">
           <button 
             className="compare-answer-button" 
-            style={{ backgroundColor: getCSSVariable("--color-green") }}
+            style={{ backgroundColor: colorHex.RED }}
           >
-            Regular Wheel
+            Try Biased Wheel
           </button>
         </Link>
       </div>
-      
+
       {/* Flex container for heading and SVG */}
       <div
         style={{
@@ -153,7 +141,7 @@ export default function BiasedPage() {
             textAlign: "center",
           }}
         >
-          This wheel is broken! It doesn&apos;t spin fairly. Try it out and see how the distributions differ from the normal wheel.
+          Choose how many times you want to spin the wheel and think how the distribution shows on the graphs below.
         </h2>
 
         <div
@@ -166,8 +154,8 @@ export default function BiasedPage() {
         >
           <div className="image-container" style={{ width: "300px", height: "300px", position: "relative", margin: "0 auto" }}>
             <Image
-              src="/broken-wheel.svg"
-              alt="Broken Roulette Wheel"
+              src="/roulette-wheel.svg"
+              alt="Roulette Wheel"
               fill
               style={{
                 transform: "rotate(11deg)",
@@ -190,7 +178,7 @@ export default function BiasedPage() {
           marginTop: "-20px",
         }}
       >
-        Let&apos;s spin the biased wheel
+        Let&apos;s spin the wheel
       </p>
 
       {/* Button Container for Horizontal Layout */}
@@ -261,6 +249,7 @@ export default function BiasedPage() {
           <span style={{ color: colorHex.GREEN, flex: 1, textAlign: "right" }}>
             {((statistics.colorCounts[colorHex.GREEN] / statistics.totalSpins) * 100).toFixed(1)}%
           </span>
+
         </div>
       </div>
 
