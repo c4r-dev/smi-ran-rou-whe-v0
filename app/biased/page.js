@@ -76,12 +76,12 @@ export default function BiasedPage() {
         // 70% chance to get a red number
         const redNumbers = COLORS.RED;
         newNumber = redNumbers[Math.floor(Math.random() * redNumbers.length)];
-      } else if (randomValue < 0.9) {
-        // 20% chance to get a black number
+      } else if (randomValue < 0.9376) {
+        // 23.76% chance to get a black number
         const blackNumbers = COLORS.BLACK;
         newNumber = blackNumbers[Math.floor(Math.random() * blackNumbers.length)];
       } else {
-        // 10% chance to get green (0)
+        // 6.24% (1/16) chance to get green (0)
         newNumber = 0;
       }
 
